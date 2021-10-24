@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/vue.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <title>LalaLiesl</title>
+</head>
+<body>
+  <div id="app">
+
+    <div v-if="!loggedIn">
+      <a href="/login">spoti</a>
+    </div>
+
+    <div v-if="loggedIn" class="content">
+
+      <div v-if="currentTrack" class="current-track">
+        <current-track :current-track="currentTrack"></current-track>
+      </div>
+
+      <div class="search">
+        <input type="text" ref="search" v-model="query" @keyup.enter="searchSpoti">
+        <button @click="searchSpoti"></button>
+      </div>
+
+      <div v-if="Object.keys(searchResults).length" class="results">
+        <searched-track v-for="track in searchResults.tracks.items"
+          :key="track.id"
+          :title="track.name"
+          :artists="track.artists"
+        ></searched-track>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

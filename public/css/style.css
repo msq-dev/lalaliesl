@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Karla:wght@200;500&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --bg-clr: #202124;
+  --clr: #e8eaed;
+  --fw-normal: 200;
+  --fw-bold: 500;
+  --ff-text: "Karla";
+}
+
+body {
+  background: var(--bg-clr);
+  color: var(--clr);
+  font-family: var(--ff-text), sans-serif;
+  font-weight: var(--fw-normal);
+  font-size: 110%;
+  width: 100vw;
+  white-space: nowrap;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 1rem;
+}
+
+.current-track {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  background: var(--clr);
+  color: var(--bg-clr);
+  width: 100%;
+  padding: 0.75rem;
+}
+
+.title {
+  font-weight: var(--fw-bold);
+}
+
+.artists {
+  font-size: 80%;
+}
+
+input,
+button {
+  background: var(--bg-clr);
+  color: var(--clr);
+  border: none;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+input {
+  padding: 0.25rem 0.5rem;
+  border-bottom: 1px solid var(--clr);
+}
+
+input:focus {
+  outline: none;
+}
+
+.search > button {
+  position: relative;
+  border-radius: 100vw;
+  background: var(--clr);
+  font-size: 80%;
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.5rem;
+}
+
+.search > button::after {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+}
+
+.searched-track {
+  margin-bottom: 0.5rem;
+}
