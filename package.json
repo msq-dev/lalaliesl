@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "spotiapp for the L",
   "main": "server.js",
+  "engines": {
+    "node": "v14.17.6"
+  },
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js"
