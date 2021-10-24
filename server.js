@@ -6,7 +6,8 @@ require('dotenv').config()
 
 const client_id = process.env.CLIENT_ID
 const client_secret = process.env.CLIENT_SECRET
-const redirect_uri = `${process.env.HOST}:${process.env.PORT || 5000}/callback`
+const redirect_uri = process.env.REDIRECT_URI
+const PORT = process.env.PORT || 8888
 
 /**
 * Generates a random string containing numbers and letters
@@ -134,5 +135,5 @@ app.get('/refresh_token', function(req, res) {
   })
 })
 
-console.log(`Listening on ${process.env.PORT}`)
-app.listen(process.env.PORT || 5000)
+console.log(`Listening on ${PORT}`)
+app.listen(PORT)
