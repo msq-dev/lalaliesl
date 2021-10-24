@@ -11,17 +11,15 @@
 </head>
 <body>
   <div id="app">
+    <div v-if="Object.keys(currentTrack).length" class="current-track">
+      <current-track :current-track="currentTrack"></current-track>
+    </div>
 
     <div v-if="!loggedIn">
       <a href="/login" class="login-btn">spoti</a>
     </div>
 
     <div v-if="loggedIn" class="content">
-
-      <div v-if="currentTrack" class="current-track">
-        <current-track :current-track="currentTrack"></current-track>
-      </div>
-
       <div class="search">
         <input type="text" ref="search" v-model="query" @keyup.enter="searchSpoti">
         <button @click="searchSpoti"></button>

@@ -37,29 +37,21 @@ body {
   font-family: var(--ff-text), sans-serif;
   font-weight: var(--fw-normal);
   font-size: 110%;
-  width: 100vw;
-  white-space: nowrap;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  padding: 1rem;
 }
 
 .current-track {
   position: fixed;
-  left: 0;
+  width: 100%;
   bottom: 0;
+  z-index: 20;
   background: var(--clr);
   color: var(--bg-clr);
-  width: 100%;
   padding: 0.75rem;
 }
 
-.title {
-  font-weight: var(--fw-bold);
-}
-
-.artists {
-  font-size: 80%;
+.content {
+  position: relative;
+  padding: 1rem;
 }
 
 input,
@@ -73,15 +65,16 @@ button {
 }
 
 .search {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  position: fixed;
+  top: 0;
   width: 100%;
-  margin-bottom: 1.5rem;
+  background: rgb(32,33,36);
+  background: linear-gradient(0deg, rgba(32,33,36,0) 0%, rgba(32,33,36,1) 15%);
+  padding: 1.7rem 2.5rem 3rem 0;
 }
 
 input {
-  padding: 0.25rem 0.5rem;
+  width: 75%;
   border-bottom: 1px solid var(--clr);
 }
 
@@ -90,23 +83,36 @@ input:focus {
 }
 
 .search > button {
-  position: relative;
+  position: absolute;
+  right: 3rem;
   border-radius: 100vw;
   background: var(--clr);
-  font-size: 80%;
-  font-weight: var(--fw-bold);
-  text-transform: uppercase;
   width: 2rem;
   height: 2rem;
-  margin-right: 0.5rem;
 }
 
-.search > button::after {
-  position: absolute;
-  inset: 0;
-  z-index: 10;
+
+.title {
+  font-weight: var(--fw-bold);
+}
+
+.artists {
+  font-size: 80%;
+}
+
+.results {
+  margin: 5rem 0;
 }
 
 .searched-track {
   margin-bottom: 0.5rem;
 }
+
+
+
+
+
+
+
+
+

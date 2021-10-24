@@ -7,10 +7,12 @@ Vue.component("current-track", {
       return this.currentTrack.item.artists.map(a => a.name).join(", ")
     }
   },
-  template: `<div class="current-track">
-               <div class="title">{{ currentTrack.item.name }}</div>
-               <div class="artists">{{ artistsString }}</div>
-             </div>`
+  template: `
+            <div>
+              <div class="title">{{ currentTrack.item.name }}</div>
+              <div class="artists">{{ artistsString }}</div>            
+            </div>
+            `
 })
 
 
@@ -39,7 +41,8 @@ let app = new Vue({
     loggedIn: false,
     query: "",
     searchResults: {},
-    currentTrack: {}   
+    currentTrack: {},
+    updateCurrentTrack: null
   },
   methods: {
     searchSpoti() {
@@ -52,6 +55,7 @@ let app = new Vue({
         .then(data => this.searchResults = data)
         .catch(err => console.error(err))
     },
+
     getCurrentTrack() {
       fetch("https://api.spotify.com/v1/me/player/currently-playing", {
         headers: {
@@ -59,9 +63,13 @@ let app = new Vue({
         }
       }).then(res => res.json())
         .then(data => this.currentTrack = data)
-        .catch(err => console.error(err))
+        .catch(() => {
+          this.currentTrack = {}
+          clearInterval(this.updateCurrentTrack)
+        })
     }
   },
+
   mounted() {
     let hashParams = {}
     let e, r = /([^&;=]+)=?([^&;]*)/g,
@@ -76,14 +84,16 @@ let app = new Vue({
       if (hashParams.access_token) {
         this.access_token = hashParams.access_token
         this.refresh_token = hashParams.refresh_token
-        fetch("https://api.spotify.com/v1/me", {
-          headers: {
-            "Authorization": "Bearer " + this.access_token
-          }
-        }).then(res => this.loggedIn = true)
-          .then(res => this.getCurrentTrack())
-          .catch(err => console.error(err))
+        this.loggedIn = true
       }
+
+      this.getCurrentTrack()
+      this.updateCurrentTrack = setInterval(() => {
+        this.getCurrentTrack()
+      }, 3000)
     }
+  },
+  beforeDestroy() {
+    clearInterval(this.updateCurrentTrack)
   }
 })
